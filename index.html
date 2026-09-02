@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XCARS // Master Systems Display</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="msd" aria-label="XCARS master systems display">
+    <header class="topbar">
+      <div class="rail rail-left"></div>
+      <div class="title-block">
+        <strong>XCARS</strong>
+        <span>XTERRA COMPUTER ACCESS &amp; ROUTING SYSTEM</span>
+      </div>
+      <div class="vehicle-id">
+        <span>WD22</span>
+        <strong>MASTER SYSTEMS DISPLAY</strong>
+      </div>
+      <div class="rail rail-right"></div>
+    </header>
+
+    <section class="workspace">
+      <aside class="panel status-panel">
+        <h2>SYSTEM STATUS</h2>
+        <ul id="system-list"></ul>
+      </aside>
+
+      <section class="vehicle-stage" aria-label="Xterra system schematic">
+        <img src="assets/xterra-cutaway.png" alt="First-generation Nissan Xterra cutaway schematic">
+        <button class="hotspot engine" data-system="ENGINE" aria-label="Engine"></button>
+        <button class="hotspot driveline" data-system="DRIVELINE" aria-label="Driveline"></button>
+        <button class="hotspot cabin" data-system="CABIN" aria-label="Cabin"></button>
+        <button class="hotspot cargo" data-system="CARGO" aria-label="Cargo area"></button>
+        <div class="scan-line" aria-hidden="true"></div>
+      </section>
+
+      <aside class="panel detail-panel">
+        <h2 id="detail-title">VEHICLE</h2>
+        <div class="readout"><span>STATUS</span><strong id="detail-status">NOMINAL</strong></div>
+        <p id="detail-copy">Select a highlighted subsystem for details.</p>
+        <div class="bars" id="detail-bars" aria-hidden="true"></div>
+      </aside>
+    </section>
+
+    <footer class="footerbar">
+      <div class="mode"><span>SYSTEM MODE</span><strong>NORMAL</strong></div>
+      <div class="telemetry">
+        <span>RPM <b id="rpm">0825</b></span>
+        <span>COOLANT <b id="coolant">188°F</b></span>
+        <span>BUS <b id="voltage">13.8V</b></span>
+        <span>LINK <b>BT AUDIO</b></span>
+      </div>
+      <div class="clock" id="clock">--:--</div>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
