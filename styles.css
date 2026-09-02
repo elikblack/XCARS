@@ -1,0 +1,112 @@
+:root {
+  --bg: #050505;
+  --ink: #f5a623;
+  --lav: #b979bd;
+  --lav2: #7d4c86;
+  --rail: #8a8a8a;
+  --cyan: #8edce6;
+  --dim: #2c2030;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #000; color: #eee; font-family: "Arial Narrow", "Helvetica Neue", sans-serif; }
+body { display: grid; place-items: center; overflow: hidden; }
+
+.msd {
+  width: 100vw;
+  height: 100vh;
+  min-width: 900px;
+  min-height: 540px;
+  padding: 1.2vh 1vw;
+  display: grid;
+  grid-template-rows: 8vh 1fr 8vh;
+  gap: 1vh;
+  background: radial-gradient(circle at 50% 45%, #131016 0, var(--bg) 55%, #000 100%);
+}
+
+.topbar, .footerbar { display: flex; align-items: stretch; gap: 1vw; }
+.rail { background: var(--rail); flex: 1; border-radius: 999px; opacity: .95; }
+.rail-left { border-bottom-right-radius: 14px; }
+.rail-right { border-bottom-left-radius: 14px; }
+.title-block, .vehicle-id { display: flex; flex-direction: column; justify-content: center; }
+.title-block strong, .vehicle-id strong { color: var(--ink); font-size: clamp(24px, 3.2vw, 54px); letter-spacing: .02em; line-height: .85; }
+.title-block span, .vehicle-id span { color: var(--lav); font-weight: 700; letter-spacing: .09em; font-size: clamp(9px, .8vw, 14px); }
+.vehicle-id { align-items: flex-end; text-align: right; }
+
+.workspace {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 14vw 1fr 16vw;
+  gap: 1vw;
+}
+
+.panel {
+  border: 2px solid var(--lav);
+  border-radius: 18px;
+  background: rgba(10, 6, 12, .88);
+  padding: 1rem;
+  overflow: hidden;
+}
+.panel h2 { margin: 0 0 .9rem; color: var(--ink); font-size: clamp(14px, 1.25vw, 22px); letter-spacing: .06em; }
+#system-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .42rem; }
+#system-list li { display: flex; justify-content: space-between; gap: .5rem; padding: .38rem .45rem; background: var(--dim); font-size: clamp(10px, .75vw, 14px); }
+#system-list b { color: var(--ink); }
+
+.vehicle-stage {
+  position: relative;
+  overflow: hidden;
+  border-top: 10px solid var(--lav2);
+  border-bottom: 10px solid var(--lav2);
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  background: #000;
+}
+.vehicle-stage img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.hotspot {
+  position: absolute;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 18px;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.hotspot:hover, .hotspot:focus-visible, .hotspot.active {
+  outline: none;
+  border-color: var(--ink);
+  background: rgba(245, 166, 35, .055);
+  box-shadow: 0 0 18px rgba(245, 166, 35, .35), inset 0 0 18px rgba(245, 166, 35, .12);
+}
+.engine { left: 4%; top: 30%; width: 28%; height: 43%; }
+.driveline { left: 28%; top: 57%; width: 50%; height: 25%; }
+.cabin { left: 32%; top: 20%; width: 40%; height: 40%; }
+.cargo { right: 4%; top: 25%; width: 24%; height: 37%; }
+
+.scan-line {
+  position: absolute;
+  left: 4%; right: 4%; top: -4%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: .25;
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan { to { transform: translateY(75vh); } }
+
+.readout { display: flex; justify-content: space-between; gap: .5rem; border-bottom: 1px solid var(--lav2); padding: .5rem 0; font-size: clamp(10px, .85vw, 15px); }
+.readout strong { color: var(--ink); }
+#detail-copy { color: #d7c8da; line-height: 1.4; font-size: clamp(11px, .85vw, 15px); }
+.bars { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; margin-top: 1rem; }
+.bars i { height: 9vh; background: linear-gradient(to top, var(--lav2) 0 70%, #1b111d 70%); border-radius: 2px; }
+
+.footerbar { align-items: center; background: var(--rail); border-radius: 999px 18px 18px 999px; padding: .55rem 1rem; color: #111; }
+.mode { display: flex; align-items: center; gap: .65rem; white-space: nowrap; }
+.mode span { font-weight: 800; color: #111; }
+.mode strong { background: var(--ink); padding: .45rem 1rem; border-radius: 6px; }
+.telemetry { flex: 1; display: flex; justify-content: center; gap: 2vw; font-size: clamp(10px, .75vw, 14px); }
+.telemetry b { color: #2c102e; }
+.clock { font-weight: 900; font-size: clamp(16px, 1.4vw, 24px); }
+
+@media (max-aspect-ratio: 4/3) {
+  .workspace { grid-template-columns: 17vw 1fr 18vw; }
+}
