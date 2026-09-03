@@ -1,6 +1,44 @@
 {
-  "source": "x2-for-xport.svg",
-  "viewBox": { "width": 911.92, "height": 484 },
+  "source": {
+    "ai": "x2-for-xport.ai",
+    "svg": "x2-for-xport.svg"
+  },
+  "artboard": {
+    "width": 911.917,
+    "height": 484,
+    "aspectRatio": 1.8841260169
+  },
+  "vehicle": {
+    "sourcePixels": { "width": 1672, "height": 941 },
+    "placedRect": {
+      "x": 147.15323,
+      "y": 82.84186,
+      "x2": 718.35352,
+      "y2": 404.31284
+    },
+    "cssPercent": {
+      "left": 16.136691,
+      "top": 17.116086,
+      "width": 62.637311,
+      "height": 66.419624
+    }
+  },
+  "header": {
+    "plate": {
+      "text": "ALF-1129",
+      "font": "Antonio-Regular",
+      "fontSizePt": 26.2601,
+      "leftPercent": 11.034447,
+      "topPercent": 8.045145
+    },
+    "brand": {
+      "text": "XCARS",
+      "font": "Antonio-Regular",
+      "fontSizePt": 25.67327,
+      "leftPercent": 80.975651,
+      "topPercent": 8.21136
+    }
+  },
   "bulletColumns": { "left": 134.77, "right": 760.21 },
   "left": [
     { "system": "CARGO BAY", "bulletY": 138.94, "target": { "x": 213.38, "y": 150.61 }, "color": "#aed0e2" },
