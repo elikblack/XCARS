@@ -9,7 +9,7 @@
   --plum:#2f2140;
   --brown:#3b2719;
   --lav:#c9bdfb;
-  --line:rgba(214,210,224,.34);
+  --line:rgba(214,210,224,.48);
   --text:#d7d3df;
 }
 
@@ -37,7 +37,7 @@ button{font:inherit}
 .lcars-shell{position:absolute;inset:0;pointer-events:none;z-index:0}
 .cap,.rail,.elbow,.lower-rail,.accent{position:absolute}
 
-/* HEADER: labels have dedicated black lanes between caps and rails. */
+/* HEADER */
 .cap{
   top:6.46%;
   height:6.46%;
@@ -54,7 +54,6 @@ button{font:inherit}
   border-radius:0 999px 999px 0
 }
 
-/* Filled LCARS elbows with black cutouts for the shared inner-corner language. */
 .rail{
   top:6.46%;
   height:9.83%;
@@ -101,19 +100,28 @@ button{font:inherit}
 }
 .plate,.brand{
   position:absolute;
-  top:6.05%;
-  display:inline-block;
+  top:6.46%;
+  height:6.46%;
+  display:flex;
+  align-items:center;
   margin:0;
+  background:#000;
   font-family:"Antonio","Arial Narrow",sans-serif;
   font-weight:500;
-  font-size:clamp(30px,3.05vw,62px);
-  line-height:1;
+  font-size:clamp(44px,5vw,88px);
+  line-height:.8;
   letter-spacing:0;
   white-space:nowrap;
   text-transform:uppercase
 }
-.plate{left:6.90%}
-.brand{right:6.55%}
+.plate{
+  left:6.35%;
+  padding:0 .65vw 0 .35vw
+}
+.brand{
+  right:6.05%;
+  padding:0 .35vw 0 .65vw
+}
 
 /* CENTRAL MSD COLUMNS */
 .accent-a,.accent-d{display:none}
@@ -276,63 +284,67 @@ button{font:inherit}
 .hotspot.driveline{left:30%;top:59%;width:45%;height:20%}
 .hotspot.engine{right:0;top:31%;width:28%;height:45%}
 
-/* CALLOUTS */
+/* CALLOUTS: individually positioned, color-coded, with curved leader stems. */
 .callouts{
   position:absolute;
-  right:5.1%;
-  top:21.8%;
+  right:2.45%;
+  top:20.0%;
   width:29%;
-  height:30%;
-  z-index:5;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between
+  height:55%;
+  z-index:5
 }
 .callouts button{
-  position:relative;
+  --callout:var(--lav);
+  --lead:20vw;
+  --drop:0;
+  position:absolute;
+  right:0;
   display:flex;
   align-items:center;
-  gap:.5rem;
+  gap:.55rem;
   border:0;
   padding:0;
   background:transparent;
-  color:#bfb8cf;
+  color:var(--callout);
   cursor:pointer;
   text-align:left;
-  font-weight:500;
-  font-size:clamp(8px,.68vw,13px);
-  letter-spacing:.02em;
+  font-weight:400;
+  font-size:clamp(10px,1vw,20px);
+  line-height:1;
+  letter-spacing:.015em;
   white-space:nowrap
 }
 .callouts button::before{
   content:"";
   position:absolute;
-  right:calc(100% + .3rem);
-  height:1px;
-  background:var(--line)
+  right:calc(100% + .55rem);
+  top:50%;
+  width:var(--lead);
+  height:var(--drop);
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+  border-top-left-radius:1.7vw;
+  pointer-events:none
 }
-.callouts button:nth-child(1)::before{width:46vw}
-.callouts button:nth-child(2)::before{width:42vw}
-.callouts button:nth-child(3)::before{width:38vw}
-.callouts button:nth-child(4)::before{width:34vw}
-.callouts button:nth-child(5)::before{width:31vw}
-.callouts button:nth-child(6)::before{width:27vw}
-.callouts button:nth-child(7)::before{width:22vw}
-.callouts button:nth-child(8)::before{width:18vw}
 .callouts i{
-  width:8px;
-  height:8px;
+  width:clamp(7px,.7vw,13px);
+  height:clamp(7px,.7vw,13px);
   flex:0 0 auto;
   border-radius:50%;
-  background:var(--lav);
-  box-shadow:0 0 8px currentColor
+  background:currentColor;
+  box-shadow:0 0 7px currentColor
 }
-.callouts button:nth-child(2) i{background:#a04a93}
-.callouts button:nth-child(3) i{background:var(--blue)}
-.callouts button:nth-child(4) i{background:#7eb7ce}
-.callouts button:nth-child(5) i{background:var(--violet)}
-.callouts button:nth-child(6) i,.callouts button:nth-child(7) i{background:var(--peach)}
-.callouts button:hover,.callouts button.active{color:#fff}
+.callouts button:hover,.callouts button.active{filter:brightness(1.22)}
+
+.callouts button:nth-child(1){top:0%;--callout:#c9bdfb;--lead:44vw;--drop:6.6vh}
+.callouts button:nth-child(2){top:10.5%;--callout:#9c4f91;--lead:37vw;--drop:7.4vh}
+.callouts button:nth-child(3){top:20.5%;--callout:#add0e3;--lead:29vw;--drop:10.8vh}
+.callouts button:nth-child(4){top:38.0%;--callout:#86bed6;--lead:23vw;--drop:7.0vh}
+.callouts button:nth-child(5){top:44.0%;--callout:#bb83fe;--lead:21vw;--drop:4.2vh}
+.callouts button:nth-child(6){top:52.0%;--callout:#f1a66f;--lead:18.5vw;--drop:3.4vh}
+.callouts button:nth-child(7){top:66.0%;--callout:#f1a66f;--lead:17vw;--drop:0}
+.callouts button:nth-child(8){top:76.0%;--callout:#c9bdfb;--lead:12vw;--drop:0}
+.callouts button:nth-child(9){top:95.0%;--callout:#f1a66f;--lead:13.5vw;--drop:0}
 
 .detail-strip{
   position:absolute;
