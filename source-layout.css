@@ -1,0 +1,175 @@
+/*
+ * Source-of-truth geometry derived from x2-for-xport.ai + x2-for-xport.svg.
+ *
+ * Illustrator supplies the artboard, placed Xterra image transform, and live
+ * text positions. The SVG supplies the exact LCARS frame, leader curves,
+ * bullet columns, label Y positions, and colors.
+ *
+ * This file intentionally loads after styles.css and callouts.css so the
+ * hand-authored web UI can keep its behavior while its geometry follows the
+ * design source exactly.
+ */
+
+.msd{
+  container-type:size;
+  aspect-ratio:911.917 / 484;
+  width:min(100vw,calc(100vh * (911.917 / 484)));
+  height:min(100vh,calc(100vw * (484 / 911.917)));
+}
+
+/* The old CSS-built shell is replaced by the Illustrator/SVG geometry. */
+.lcars-shell{display:none}
+
+.msd::before,
+.msd::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  pointer-events:none;
+}
+
+/* Large LCARS structure, exactly as exported from the vector reference. */
+.msd::before{
+  z-index:0;
+  background-image:url("assets/reference-frame.svg");
+}
+
+/* Exact leader paths from the vector reference. */
+.msd::after{
+  z-index:4;
+  background-image:url("assets/callout-leaders.svg");
+}
+
+/* Exact placed-image rectangle from the PDF-compatible Illustrator file.
+   The embedded image is 1672 x 941 px and is placed without cropping. */
+.hero{
+  left:16.136691%;
+  top:17.116086%;
+  width:62.637311%;
+  height:66.419624%;
+  z-index:3;
+}
+.hero-image{
+  width:100%;
+  height:100%;
+  object-fit:fill;
+}
+
+/* Header positions and sizes are taken from the live Antonio text in AI. */
+.identity{
+  position:absolute;
+  inset:0;
+  z-index:6;
+  pointer-events:none;
+}
+.plate,.brand{
+  position:absolute;
+  right:auto;
+  height:auto;
+  padding:0;
+  margin:0;
+  background:transparent;
+  display:block;
+  align-items:initial;
+  font-family:"Antonio","Arial Narrow",sans-serif;
+  font-weight:400;
+  line-height:1;
+  letter-spacing:0;
+  white-space:nowrap;
+  color:#f1c219;
+}
+.plate{
+  left:11.034447%;
+  top:8.045145%;
+  font-size:5.425641cqh;
+}
+.brand{
+  left:80.975651%;
+  top:8.211360%;
+  font-size:5.304395cqh;
+}
+
+/* The SVG now draws the leaders. HTML remains responsible only for live
+   labels/bullets, which preserves hover/click behavior. */
+.callouts{
+  position:absolute;
+  inset:0;
+  width:auto;
+  height:auto;
+  z-index:5;
+  pointer-events:none;
+}
+.callouts button{
+  --dot:0.318cqw;
+  position:absolute;
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:.18cqw;
+  padding:0;
+  margin:0;
+  border:0;
+  background:transparent;
+  font-family:"Antonio","Arial Narrow",sans-serif;
+  font-size:1.033058cqh;
+  font-weight:400;
+  line-height:1;
+  letter-spacing:0;
+  white-space:nowrap;
+  pointer-events:auto;
+  transform:translateY(-50%);
+}
+.callouts button::before{display:none}
+.callouts button span{display:block;line-height:1}
+.callouts i{
+  width:var(--dot);
+  height:var(--dot);
+  flex:0 0 var(--dot);
+  margin:0;
+  border-radius:50%;
+  background:currentColor;
+  box-shadow:none;
+}
+
+/* Both sides use a single, exact vertical bullet column. Left-side HTML is
+   text then bullet, so the bullet naturally lives on the right. */
+.callouts-left button{
+  left:auto;
+  right:calc(85.221243% - (.159cqw));
+  flex-direction:row;
+  text-align:right;
+}
+.callouts-right button{
+  left:calc(83.363947% - (.159cqw));
+  right:auto;
+  flex-direction:row;
+  text-align:left;
+}
+
+/* Left bullet positions / colors from the SVG. */
+.callouts-left button:nth-child(1){top:28.706612%;color:#aed0e2}
+.callouts-left button:nth-child(2){top:32.636364%;color:#916399}
+.callouts-left button:nth-child(3){top:40.419421%;color:#aed0e2}
+.callouts-left button:nth-child(4){top:43.816116%;color:#a285bd}
+.callouts-left button:nth-child(5){top:48.716942%;color:#aed0e2}
+.callouts-left button:nth-child(6){top:56.758264%;color:#efa672}
+.callouts-left button:nth-child(7){top:66.429752%;color:#a285bd}
+
+/* Right bullet positions / colors from the SVG. */
+.callouts-right button:nth-child(1){top:27.948347%;color:#aed0e2}
+.callouts-right button:nth-child(2){top:31.262397%;color:#916399}
+.callouts-right button:nth-child(3){top:33.301653%;color:#aed0e2}
+.callouts-right button:nth-child(4){top:38.254132%;color:#aed0e2}
+.callouts-right button:nth-child(5){top:40.892562%;color:#a285bd}
+.callouts-right button:nth-child(6){top:43.103306%;color:#efa672}
+.callouts-right button:nth-child(7){top:49.469008%;color:#efa672}
+.callouts-right button:nth-child(8){top:54.886364%;color:#efa672}
+.callouts-right button:nth-child(9){top:61.378099%;color:#a285bd}
+
+.callouts button:hover,
+.callouts button.active{
+  filter:brightness(1.22);
+}
