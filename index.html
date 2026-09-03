@@ -3,59 +3,78 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>XCARS // Master Systems Display</title>
+  <title>XCARS // ALF-1129</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="msd" aria-label="XCARS master systems display">
-    <header class="topbar">
-      <div class="rail rail-left"></div>
-      <div class="title-block">
-        <strong>XCARS</strong>
-        <span>XTERRA COMPUTER ACCESS &amp; ROUTING SYSTEM</span>
-      </div>
-      <div class="vehicle-id">
-        <span>WD22</span>
-        <strong>MASTER SYSTEMS DISPLAY</strong>
-      </div>
-      <div class="rail rail-right"></div>
+    <div class="lcars-shell" aria-hidden="true">
+      <div class="cap cap-left"></div>
+      <div class="rail rail-top-left"></div>
+      <div class="rail rail-top-right"></div>
+      <div class="cap cap-right"></div>
+      <div class="elbow elbow-left"></div>
+      <div class="elbow elbow-center"></div>
+      <div class="elbow elbow-right"></div>
+      <div class="lower-rail lower-left"></div>
+      <div class="lower-rail lower-center"></div>
+      <div class="lower-rail lower-right"></div>
+      <div class="accent accent-a"></div>
+      <div class="accent accent-b"></div>
+      <div class="accent accent-c"></div>
+      <div class="accent accent-d"></div>
+    </div>
+
+    <header class="identity">
+      <div class="plate">ALF-1129</div>
+      <div class="brand">XCARS</div>
     </header>
 
-    <section class="workspace">
-      <aside class="panel status-panel">
-        <h2>SYSTEM STATUS</h2>
-        <ul id="system-list"></ul>
-      </aside>
-
-      <section class="vehicle-stage" aria-label="Xterra system schematic">
-        <img src="assets/xterra-cutaway.png" alt="First-generation Nissan Xterra cutaway schematic">
-        <button class="hotspot engine" data-system="ENGINE" aria-label="Engine"></button>
-        <button class="hotspot driveline" data-system="DRIVELINE" aria-label="Driveline"></button>
-        <button class="hotspot cabin" data-system="CABIN" aria-label="Cabin"></button>
-        <button class="hotspot cargo" data-system="CARGO" aria-label="Cargo area"></button>
-        <div class="scan-line" aria-hidden="true"></div>
-      </section>
-
-      <aside class="panel detail-panel">
-        <h2 id="detail-title">VEHICLE</h2>
-        <div class="readout"><span>STATUS</span><strong id="detail-status">NOMINAL</strong></div>
-        <p id="detail-copy">Select a highlighted subsystem for details.</p>
-        <div class="bars" id="detail-bars" aria-hidden="true"></div>
-      </aside>
+    <section class="hero" aria-label="Xterra cutaway schematic">
+      <img class="hero-image" src="assets/xterra-cutaway.png" alt="First-generation Nissan Xterra cutaway schematic">
+      <button class="hotspot cargo" data-system="CARGO BAY" aria-label="Cargo bay"></button>
+      <button class="hotspot cabin" data-system="OBSERVATION LOUNGE" aria-label="Cabin"></button>
+      <button class="hotspot driveline" data-system="FUSION GENERATOR" aria-label="Driveline"></button>
+      <button class="hotspot engine" data-system="FORWARD PHOTON EMITTER" aria-label="Engine"></button>
     </section>
 
-    <footer class="footerbar">
-      <div class="mode"><span>SYSTEM MODE</span><strong>NORMAL</strong></div>
-      <div class="telemetry">
-        <span>RPM <b id="rpm">0825</b></span>
-        <span>COOLANT <b id="coolant">188°F</b></span>
-        <span>BUS <b id="voltage">13.8V</b></span>
-        <span>LINK <b>BT AUDIO</b></span>
+    <section class="callouts" aria-label="Vehicle systems">
+      <button data-system="OBSERVATION LOUNGE"><i></i><span>OBSERVATION LOUNGE</span></button>
+      <button data-system="LATERAL SENSOR ARRAY"><i></i><span>LATERAL SENSOR ARRAY</span></button>
+      <button data-system="FORWARD SHIELD GRID"><i></i><span>FORWARD SHIELD GRID</span></button>
+      <button data-system="PRECIPITATION DEFLECTOR"><i></i><span>PRECIPITATION DEFLECTOR</span></button>
+      <button data-system="FUSION GENERATOR"><i></i><span>FUSION GENERATOR</span></button>
+      <button data-system="BUSSARD HOODSCOOP"><i></i><span>BUSSARD HOODSCOOP</span></button>
+      <button data-system="FORWARD PHOTON EMITTER"><i></i><span>FORWARD PHOTON EMITTER</span></button>
+      <button data-system="CARGO BAY"><i></i><span>CARGO BAY</span></button>
+    </section>
+
+    <section class="detail-strip" aria-live="polite">
+      <span id="detail-kicker">SYSTEM SELECT</span>
+      <strong id="detail-title">ALF-1129</strong>
+      <span id="detail-copy">XCARS MASTER SYSTEMS DISPLAY // VEHICLE NOMINAL</span>
+    </section>
+
+    <section class="mini-panel" aria-label="Top view and subsystem activity">
+      <div class="mini-tabs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="mini-view">
+        <img src="assets/xterra-top.png" alt="Top-down Xterra schematic" onerror="this.hidden=true;this.parentElement.classList.add('missing')">
+        <span class="missing-label">TOP VIEW // ASSET PENDING</span>
       </div>
-      <div class="clock" id="clock">--:--</div>
+      <div class="frequency" aria-hidden="true">
+        <span>000hz</span><span>001hz</span><span>002hz</span><span>003hz</span><span>004hz</span>
+      </div>
+      <div class="activity" id="activity" aria-hidden="true"></div>
+    </section>
+
+    <footer class="footerline">
+      <span>WD22</span>
+      <span id="mode">MODE // NORMAL</span>
+      <span>BUS <b id="voltage">13.8V</b></span>
+      <span>RPM <b id="rpm">0825</b></span>
+      <span id="clock">--:--</span>
     </footer>
   </main>
-
   <script src="app.js"></script>
 </body>
 </html>
