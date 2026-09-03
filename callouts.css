@@ -1,0 +1,80 @@
+/* Focused callout tuning layer. Loaded after styles.css so we can iterate on
+   label and leader geometry without disturbing the rest of the MSD shell. */
+
+.msd{
+  container-type:size;
+}
+
+.callouts{
+  right:2.45%;
+  top:18.8%;
+  width:31%;
+  height:62%;
+}
+
+.callouts button{
+  --lead:20cqw;
+  --stem:0cqh;
+  left:61%;
+  right:auto;
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  line-height:1;
+}
+
+.callouts button span{
+  display:block;
+  line-height:1;
+}
+
+.callouts i{
+  width:clamp(7px,.62cqw,12px);
+  height:clamp(7px,.62cqw,12px);
+  margin:0;
+  align-self:center;
+  transform:none;
+  box-shadow:0 0 5px currentColor;
+}
+
+/* The horizontal section always leaves from the label dot. The far-left
+   end bends vertically to the actual vehicle feature. */
+.callouts button::before{
+  right:calc(100% + .5rem);
+  width:var(--lead);
+  height:var(--stem);
+  pointer-events:none;
+  border:0;
+  background:transparent;
+  box-sizing:border-box;
+}
+
+.callouts button[data-lead-dir="down"]::before{
+  top:50%;
+  bottom:auto;
+  border-top:1px solid rgba(188,193,202,.52);
+  border-left:1px solid rgba(188,193,202,.52);
+  border-top-left-radius:1.25cqw;
+}
+
+.callouts button[data-lead-dir="up"]::before{
+  top:auto;
+  bottom:50%;
+  border-bottom:1px solid rgba(188,193,202,.52);
+  border-left:1px solid rgba(188,193,202,.52);
+  border-bottom-left-radius:1.25cqw;
+}
+
+.callouts button[data-lead-dir="flat"]::before{
+  top:50%;
+  bottom:auto;
+  height:0;
+  border-top:1px solid rgba(188,193,202,.52);
+}
+
+/* Escape Pods intentionally breaks the otherwise rigid label column, as in
+   the reference MSD. */
+.callouts button[data-system="ESCAPE PODS"]{
+  left:48%;
+}
