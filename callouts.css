@@ -1,11 +1,40 @@
-/* Symmetric dual-sided callout layer. Loaded after styles.css. */
+/* SVG-derived layout layer. Loaded after styles.css.
+   Source of truth: x2-for-xport.svg, viewBox 911.92 x 484. */
 
 .msd{
   container-type:size;
+  width:min(100vw,188.4132vh);
+  height:min(100vh,53.0750vw);
+  aspect-ratio:911.92 / 484;
 }
 
-/* Give the vehicle a little more presence now that the labels live at the
-   perimeter instead of crowding the center. */
+/* Use the exported vector structure directly rather than approximating the
+   large LCARS shapes with independent CSS rectangles. */
+.lcars-shell{
+  inset:0;
+  background:url('assets/reference-frame.svg') center / 100% 100% no-repeat;
+}
+.lcars-shell > *{display:none}
+
+/* Header placement comes from the exported outline bounds. */
+.identity{inset:0}
+.plate,.brand{
+  top:9.62%;
+  height:5.63%;
+  display:flex;
+  align-items:center;
+  padding:0 .35cqw;
+  background:#000;
+  font-family:"Antonio","Arial Narrow",sans-serif;
+  font-size:7.05cqh;
+  font-weight:500;
+  line-height:.78;
+}
+.plate{left:11.07%}
+.brand{right:13.47%}
+
+/* Preserve the current vehicle treatment while moving the surrounding layout
+   onto the exact reference aspect ratio. */
 .hero{
   left:7.2%;
   top:18.1%;
@@ -13,154 +42,91 @@
   height:59%;
 }
 
+/* The leader artwork is copied directly from the Illustrator SVG, so every
+   elbow, radius, line weight, and endpoint stays exactly where it was drawn. */
+.callout-leaders{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:4;
+  pointer-events:none;
+  user-select:none;
+}
+
 .callouts{
   position:absolute;
-  top:20.0%;
-  width:6.7%;
-  height:61%;
+  inset:0;
+  width:100%;
+  height:100%;
   z-index:5;
+  pointer-events:none;
 }
 
 .callouts button{
-  --line:rgba(188,193,202,.56);
-  --bullet:#c9bdfb;
-  --lead:18cqw;
-  --stem:0cqh;
-  --radius:1.55cqw;
+  --bullet:#a285bd;
   position:absolute;
   display:flex;
   align-items:center;
-  gap:.5rem;
   width:max-content;
+  gap:.18cqw;
   padding:0;
   border:0;
   background:transparent;
   color:var(--bullet);
-  font-size:clamp(10px,.92vw,18px);
+  font-family:"Antonio","Arial Narrow",sans-serif;
+  font-size:1.20cqh;
   font-weight:400;
   line-height:1;
-  letter-spacing:.015em;
+  letter-spacing:0;
   white-space:nowrap;
   cursor:pointer;
+  pointer-events:auto;
+  transform:translateY(-50%);
 }
-
-.callouts button span{
-  display:block;
-  line-height:1;
-}
-
+.callouts button::before{content:none!important}
+.callouts button span{display:block;line-height:1}
 .callouts i{
-  width:clamp(7px,.62cqw,12px);
-  height:clamp(7px,.62cqw,12px);
+  width:.318cqw;
+  height:.318cqw;
   flex:0 0 auto;
   margin:0;
   border-radius:50%;
   background:currentColor;
-  box-shadow:0 0 5px currentColor;
+  box-shadow:0 0 .35cqw color-mix(in srgb,currentColor 55%,transparent);
 }
+.callouts button:hover,.callouts button.active{filter:brightness(1.22)}
 
-.callouts button:hover,
-.callouts button.active{
-  filter:brightness(1.22);
-}
-
-/* Right labels share one bullet column close to the outside edge. */
-.callouts-right{
-  right:3.2%;
+/* Exact bullet columns from the SVG. Left labels terminate at the bullet;
+   right labels begin at the bullet. */
+.callouts-left button{
+  right:85.0623%;
+  left:auto;
+  justify-content:flex-end;
+  text-align:right;
 }
 .callouts-right button{
-  left:0;
+  left:83.2047%;
   right:auto;
-}
-.callouts-right button::before{
-  content:"";
-  position:absolute;
-  right:calc(100% + .48rem);
-  width:var(--lead);
-  height:var(--stem);
-  border:0;
-  border-radius:0;
-  background:transparent;
-  box-sizing:border-box;
-  pointer-events:none;
-}
-.callouts-right button[data-dir="down"]::before{
-  top:50%;
-  border-top:1px solid var(--line);
-  border-left:1px solid var(--line);
-  border-top-left-radius:var(--radius);
-}
-.callouts-right button[data-dir="up"]::before{
-  bottom:50%;
-  border-bottom:1px solid var(--line);
-  border-left:1px solid var(--line);
-  border-bottom-left-radius:var(--radius);
-}
-.callouts-right button[data-dir="flat"]::before{
-  top:50%;
-  height:0;
-  border-top:1px solid var(--line);
+  text-align:left;
 }
 
-/* Left labels are a true mirror: text, then a common bullet column. */
-.callouts-left{
-  left:3.2%;
-}
-.callouts-left button{
-  right:0;
-  left:auto;
-  flex-direction:row-reverse;
-}
-.callouts-left button::before{
-  content:"";
-  position:absolute;
-  left:calc(100% + .48rem);
-  width:var(--lead);
-  height:var(--stem);
-  border:0;
-  border-radius:0;
-  background:transparent;
-  box-sizing:border-box;
-  pointer-events:none;
-}
-.callouts-left button[data-dir="down"]::before{
-  top:50%;
-  border-top:1px solid var(--line);
-  border-right:1px solid var(--line);
-  border-top-right-radius:var(--radius);
-}
-.callouts-left button[data-dir="up"]::before{
-  bottom:50%;
-  border-bottom:1px solid var(--line);
-  border-right:1px solid var(--line);
-  border-bottom-right-radius:var(--radius);
-}
-.callouts-left button[data-dir="flat"]::before{
-  top:50%;
-  height:0;
-  border-top:1px solid var(--line);
-}
+/* Left callouts: exact bullet-center Y positions and source colors. */
+.callouts-left button:nth-child(1){top:28.7066%;--bullet:#aed0e2}
+.callouts-left button:nth-child(2){top:32.6364%;--bullet:#916399}
+.callouts-left button:nth-child(3){top:40.4194%;--bullet:#aed0e2}
+.callouts-left button:nth-child(4){top:43.8161%;--bullet:#a285bd}
+.callouts-left button:nth-child(5){top:48.7169%;--bullet:#aed0e2}
+.callouts-left button:nth-child(6){top:56.7583%;--bullet:#efa672}
+.callouts-left button:nth-child(7){top:66.4298%;--bullet:#a285bd}
 
-/* Right-side label positions and leader targets:
-   rack, mirror, windshield, wipers, engine, hood, headlight, front clip,
-   front suspension. */
-.callouts-right button:nth-child(1){top:1%;--bullet:#c9bdfb;--lead:43cqw;--stem:5.0cqh}
-.callouts-right button:nth-child(2){top:8.5%;--bullet:#9c4f91;--lead:37cqw;--stem:10.8cqh}
-.callouts-right button:nth-child(3){top:14.0%;--bullet:#add0e3;--lead:34cqw;--stem:3.0cqh}
-.callouts-right button:nth-child(4){top:27.0%;--bullet:#add0e3;--lead:29cqw;--stem:4.4cqh}
-.callouts-right button:nth-child(5){top:33.0%;--bullet:#bb83fe;--lead:23cqw;--stem:5.0cqh}
-.callouts-right button:nth-child(6){top:38.5%;--bullet:#f1a66f;--lead:19cqw;--stem:3.4cqh}
-.callouts-right button:nth-child(7){top:52.0%;--bullet:#f1a66f;--lead:12.5cqw;--stem:1.0cqh}
-.callouts-right button:nth-child(8){top:62.5%;--bullet:#f1a66f;--lead:10.5cqw;--stem:2.2cqh}
-.callouts-right button:nth-child(9){top:76.0%;--bullet:#bb83fe;--lead:18cqw;--stem:5.0cqh}
-
-/* Left-side label positions and leader targets:
-   rear cargo/roof, aft sensor area, rear cabin, rear-seat egress, cabin,
-   rear bumper, rear suspension. */
-.callouts-left button:nth-child(1){top:2%;--bullet:#add0e3;--lead:17cqw;--stem:4.0cqh}
-.callouts-left button:nth-child(2){top:10.0%;--bullet:#9c4f91;--lead:14cqw;--stem:5.0cqh}
-.callouts-left button:nth-child(3){top:29.0%;--bullet:#add0e3;--lead:22cqw;--stem:0cqh}
-.callouts-left button:nth-child(4){top:36.0%;--bullet:#bb83fe;--lead:20cqw;--stem:0cqh}
-.callouts-left button:nth-child(5){top:46.0%;--bullet:#add0e3;--lead:18cqw;--stem:0cqh}
-.callouts-left button:nth-child(6){top:60.0%;--bullet:#f1a66f;--lead:9cqw;--stem:0cqh}
-.callouts-left button:nth-child(7){top:80.0%;--bullet:#bb83fe;--lead:18cqw;--stem:4.5cqh}
+/* Right callouts: exact bullet-center Y positions and source colors. */
+.callouts-right button:nth-child(1){top:27.9483%;--bullet:#aed0e2}
+.callouts-right button:nth-child(2){top:31.2624%;--bullet:#916399}
+.callouts-right button:nth-child(3){top:33.3017%;--bullet:#aed0e2}
+.callouts-right button:nth-child(4){top:38.2541%;--bullet:#aed0e2}
+.callouts-right button:nth-child(5){top:40.8926%;--bullet:#a285bd}
+.callouts-right button:nth-child(6){top:43.1033%;--bullet:#efa672}
+.callouts-right button:nth-child(7){top:49.4690%;--bullet:#efa672}
+.callouts-right button:nth-child(8){top:54.8864%;--bullet:#efa672}
+.callouts-right button:nth-child(9){top:61.3781%;--bullet:#a285bd}
