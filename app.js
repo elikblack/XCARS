@@ -1,51 +1,32 @@
 const systems = {
-  'OBSERVATION LOUNGE': ['CABIN', 'PRIMARY OCCUPANT COMPARTMENT // ENVIRONMENT NOMINAL'],
-  'LATERAL SENSOR ARRAY': ['BODY', 'DOOR / SIDE APERTURE ARRAY // PASSIVE'],
-  'FORWARD SHIELD GRID': ['GLASS', 'WINDSHIELD ASSEMBLY // STRUCTURAL INTEGRITY NOMINAL'],
-  'PRECIPITATION DEFLECTOR': ['WIPERS', 'FORWARD WIPER SYSTEM // STANDBY'],
-  'FUSION GENERATOR': ['DRIVELINE', 'VG33E POWERPLANT / TRANSMISSION PATH // ONLINE'],
-  'BUSSARD HOODSCOOP': ['INTAKE', 'FORWARD AIR INDUCTION PATH // NOMINAL'],
-  'FORWARD PHOTON EMITTER': ['ENGINE', 'HEADLAMP / ENGINE BAY SYSTEMS // ONLINE'],
   'CARGO BAY': ['CARGO', 'AFT STORAGE COMPARTMENT // SECURE'],
-  'ESCAPE PODS': ['RECOVERY', 'AFT TOW / RECOVERY POINTS // STANDBY']
+  'AFT SENSOR ARRAY': ['SENSORS', 'REARWARD OBSERVATION ARRAY // PASSIVE'],
+  'GUEST QUARTERS': ['CABIN', 'PRIMARY OCCUPANT COMPARTMENT // NOMINAL'],
+  'ESCAPE PODS': ['RECOVERY', 'EMERGENCY EGRESS / RECOVERY SYSTEM // STANDBY'],
+  'SICKBAY': ['MEDICAL', 'FIELD TRIAGE MODULE // READY'],
+  'AFT NAVIGATIONAL DEFLECTOR': ['AFT NAV', 'REAR DEFLECTION ASSEMBLY // STABLE'],
+  'SECONDARY INERTIAL DAMPER': ['SUSPENSION', 'REAR DAMPING FIELD // NOMINAL'],
+  'OBSERVATION LOUNGE': ['ROOF', 'ELEVATED EXTERNAL VIEWING PLATFORM // ACTIVE'],
+  'PRIMARY SENSOR ARRAY': ['MIRROR', 'LATERAL SENSOR CLUSTER // TRACKING'],
+  'FORWARD SHIELD GRID': ['GLASS', 'WINDSHIELD ASSEMBLY // NOMINAL'],
+  'PRECIPITATION COMPENSATOR': ['WIPERS', 'FORWARD PRECIPITATION CONTROL // STANDBY'],
+  'FUSION GENERATOR': ['ENGINE', 'VG33E POWERPLANT // ONLINE'],
+  'BUSSARD HOODSCOOP': ['HOOD', 'FORWARD INTAKE COWL // NOMINAL'],
+  'FORWARD PHOTON EMITTER': ['HEADLAMPS', 'FORWARD LIGHT EMISSION ARRAY // ONLINE'],
+  'NAVIGATIONAL DEFLECTOR': ['FRONT CLIP', 'FORWARD NAV DEFLECTION SYSTEM // READY'],
+  'INERTIAL DAMPER': ['FRONT SUSPENSION', 'PRIMARY DAMPING FIELD // NOMINAL']
 };
 
-/*
- * Hand-tuned MSD callout map.
- *
- * top   = label position within the right-side callout field
- * lead  = horizontal distance from the label dot to the bend
- * stem  = vertical distance from the bend to the vehicle feature
- * dir   = whether that feature is above or below the label
- * left  = optional departure from the common dot/label column
- *
- * The targets, in order:
- * roof rack, mirror, windshield, wipers, engine, hood, headlight,
- * bumper, then a deliberately non-specific underside recovery point.
- */
-const calloutLayout = {
-  'OBSERVATION LOUNGE':      { top: '1.5%',  lead: '41.5cqw', stem: '8.3cqh',  dir: 'down' },
-  'LATERAL SENSOR ARRAY':    { top: '10.5%', lead: '34.8cqw', stem: '13.2cqh', dir: 'down' },
-  'FORWARD SHIELD GRID':     { top: '19.0%', lead: '32.5cqw', stem: '1.9cqh',  dir: 'down' },
-  'PRECIPITATION DEFLECTOR': { top: '35.2%', lead: '28.2cqw', stem: '1.1cqh',  dir: 'up' },
-  'FUSION GENERATOR':        { top: '41.3%', lead: '25.0cqw', stem: '1.1cqh',  dir: 'down' },
-  'BUSSARD HOODSCOOP':       { top: '48.4%', lead: '21.0cqw', stem: '8.3cqh',  dir: 'up' },
-  'FORWARD PHOTON EMITTER':  { top: '60.8%', lead: '17.2cqw', stem: '10.0cqh', dir: 'up' },
-  'CARGO BAY':               { top: '69.7%', lead: '15.0cqw', stem: '10.5cqh', dir: 'up' },
-  'ESCAPE PODS':             { top: '89.4%', lead: '26.9cqw', stem: '10.2cqh', dir: 'up', left: '48%' }
-};
+/* Keep the line corner logic explicit. Position and length stay in callouts.css
+   so both sides share the same visual rules while remaining easy to tune. */
+document.querySelectorAll('.callouts-left button').forEach((button, i) => {
+  const dirs = ['down', 'down', 'flat', 'flat', 'flat', 'flat', 'down'];
+  button.dataset.dir = dirs[i];
+});
 
-const calloutButtons = [...document.querySelectorAll('.callouts [data-system]')];
-calloutButtons.forEach(button => {
-  const layout = calloutLayout[button.dataset.system];
-  if (!layout) return;
-
-  button.style.top = layout.top;
-  button.style.setProperty('--lead', layout.lead);
-  button.style.setProperty('--stem', layout.stem);
-  button.dataset.leadDir = layout.dir;
-
-  if (layout.left) button.style.left = layout.left;
+document.querySelectorAll('.callouts-right button').forEach((button, i) => {
+  const dirs = ['down', 'down', 'down', 'down', 'down', 'down', 'flat', 'flat', 'flat'];
+  button.dataset.dir = dirs[i];
 });
 
 const title = document.querySelector('#detail-title');
