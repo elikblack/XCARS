@@ -4,11 +4,20 @@
   container-type:size;
 }
 
+/* Give the vehicle a little more presence now that the labels live at the
+   perimeter instead of crowding the center. */
+.hero{
+  left:7.2%;
+  top:18.1%;
+  width:75.6%;
+  height:59%;
+}
+
 .callouts{
   position:absolute;
-  top:21.5%;
-  width:31%;
-  height:55%;
+  top:20.0%;
+  width:6.7%;
+  height:61%;
   z-index:5;
 }
 
@@ -17,7 +26,7 @@
   --bullet:#c9bdfb;
   --lead:18cqw;
   --stem:0cqh;
-  --radius:1.6cqw;
+  --radius:1.55cqw;
   position:absolute;
   display:flex;
   align-items:center;
@@ -55,9 +64,9 @@
   filter:brightness(1.22);
 }
 
-/* Right labels share one bullet column. */
+/* Right labels share one bullet column close to the outside edge. */
 .callouts-right{
-  right:3.3%;
+  right:3.2%;
 }
 .callouts-right button{
   left:0;
@@ -95,7 +104,7 @@
 
 /* Left labels are a true mirror: text, then a common bullet column. */
 .callouts-left{
-  left:3.3%;
+  left:3.2%;
 }
 .callouts-left button{
   right:0;
@@ -132,22 +141,26 @@
   border-top:1px solid var(--line);
 }
 
-/* Right-side label positions and line geometry. */
-.callouts-right button:nth-child(1){top:0%;--bullet:#c9bdfb;--lead:41cqw;--stem:7.0cqh}
-.callouts-right button:nth-child(2){top:7.5%;--bullet:#9c4f91;--lead:39cqw;--stem:5.4cqh}
-.callouts-right button:nth-child(3){top:12.5%;--bullet:#add0e3;--lead:37cqw;--stem:4.8cqh}
-.callouts-right button:nth-child(4){top:23.5%;--bullet:#add0e3;--lead:29cqw;--stem:4.8cqh}
-.callouts-right button:nth-child(5){top:29.0%;--bullet:#bb83fe;--lead:27cqw;--stem:2.8cqh}
-.callouts-right button:nth-child(6){top:34.0%;--bullet:#f1a66f;--lead:24cqw;--stem:2.2cqh}
-.callouts-right button:nth-child(7){top:47.0%;--bullet:#f1a66f;--lead:18cqw;--stem:0cqh}
-.callouts-right button:nth-child(8){top:58.0%;--bullet:#f1a66f;--lead:21cqw;--stem:0cqh}
-.callouts-right button:nth-child(9){top:69.5%;--bullet:#bb83fe;--lead:17cqw;--stem:0cqh}
+/* Right-side label positions and leader targets:
+   rack, mirror, windshield, wipers, engine, hood, headlight, front clip,
+   front suspension. */
+.callouts-right button:nth-child(1){top:1%;--bullet:#c9bdfb;--lead:43cqw;--stem:5.0cqh}
+.callouts-right button:nth-child(2){top:8.5%;--bullet:#9c4f91;--lead:37cqw;--stem:10.8cqh}
+.callouts-right button:nth-child(3){top:14.0%;--bullet:#add0e3;--lead:34cqw;--stem:3.0cqh}
+.callouts-right button:nth-child(4){top:27.0%;--bullet:#add0e3;--lead:29cqw;--stem:4.4cqh}
+.callouts-right button:nth-child(5){top:33.0%;--bullet:#bb83fe;--lead:23cqw;--stem:5.0cqh}
+.callouts-right button:nth-child(6){top:38.5%;--bullet:#f1a66f;--lead:19cqw;--stem:3.4cqh}
+.callouts-right button:nth-child(7){top:52.0%;--bullet:#f1a66f;--lead:12.5cqw;--stem:1.0cqh}
+.callouts-right button:nth-child(8){top:62.5%;--bullet:#f1a66f;--lead:10.5cqw;--stem:2.2cqh}
+.callouts-right button:nth-child(9){top:76.0%;--bullet:#bb83fe;--lead:18cqw;--stem:5.0cqh}
 
-/* Left-side label positions and line geometry. */
-.callouts-left button:nth-child(1){top:1.5%;--bullet:#add0e3;--lead:34cqw;--stem:2.0cqh}
-.callouts-left button:nth-child(2){top:10.0%;--bullet:#9c4f91;--lead:28cqw;--stem:3.5cqh}
-.callouts-left button:nth-child(3){top:26.5%;--bullet:#add0e3;--lead:27cqw;--stem:0cqh}
-.callouts-left button:nth-child(4){top:33.5%;--bullet:#bb83fe;--lead:24cqw;--stem:0cqh}
-.callouts-left button:nth-child(5){top:43.5%;--bullet:#add0e3;--lead:24cqw;--stem:0cqh}
-.callouts-left button:nth-child(6){top:56.5%;--bullet:#f1a66f;--lead:31cqw;--stem:0cqh}
-.callouts-left button:nth-child(7){top:76.0%;--bullet:#bb83fe;--lead:29cqw;--stem:5.5cqh}
+/* Left-side label positions and leader targets:
+   rear cargo/roof, aft sensor area, rear cabin, rear-seat egress, cabin,
+   rear bumper, rear suspension. */
+.callouts-left button:nth-child(1){top:2%;--bullet:#add0e3;--lead:17cqw;--stem:4.0cqh}
+.callouts-left button:nth-child(2){top:10.0%;--bullet:#9c4f91;--lead:14cqw;--stem:5.0cqh}
+.callouts-left button:nth-child(3){top:29.0%;--bullet:#add0e3;--lead:22cqw;--stem:0cqh}
+.callouts-left button:nth-child(4){top:36.0%;--bullet:#bb83fe;--lead:20cqw;--stem:0cqh}
+.callouts-left button:nth-child(5){top:46.0%;--bullet:#add0e3;--lead:18cqw;--stem:0cqh}
+.callouts-left button:nth-child(6){top:60.0%;--bullet:#f1a66f;--lead:9cqw;--stem:0cqh}
+.callouts-left button:nth-child(7){top:80.0%;--bullet:#bb83fe;--lead:18cqw;--stem:4.5cqh}
