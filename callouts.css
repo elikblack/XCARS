@@ -1,27 +1,38 @@
-/* Focused callout tuning layer. Loaded after styles.css so we can iterate on
-   label and leader geometry without disturbing the rest of the MSD shell. */
+/* Symmetric dual-sided callout layer. Loaded after styles.css. */
 
 .msd{
   container-type:size;
 }
 
 .callouts{
-  right:2.45%;
-  top:18.8%;
+  position:absolute;
+  top:21.5%;
   width:31%;
-  height:62%;
+  height:55%;
+  z-index:5;
 }
 
 .callouts button{
-  --lead:20cqw;
+  --line:rgba(188,193,202,.56);
+  --bullet:#c9bdfb;
+  --lead:18cqw;
   --stem:0cqh;
-  left:61%;
-  right:auto;
-  width:max-content;
+  --radius:1.6cqw;
+  position:absolute;
   display:flex;
   align-items:center;
   gap:.5rem;
+  width:max-content;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--bullet);
+  font-size:clamp(10px,.92vw,18px);
+  font-weight:400;
   line-height:1;
+  letter-spacing:.015em;
+  white-space:nowrap;
+  cursor:pointer;
 }
 
 .callouts button span{
@@ -32,51 +43,111 @@
 .callouts i{
   width:clamp(7px,.62cqw,12px);
   height:clamp(7px,.62cqw,12px);
+  flex:0 0 auto;
   margin:0;
-  align-self:center;
-  transform:none;
+  border-radius:50%;
+  background:currentColor;
   box-shadow:0 0 5px currentColor;
 }
 
-/* The horizontal section always leaves from the label dot. The far-left
-   end bends vertically to the actual vehicle feature. */
-.callouts button::before{
-  right:calc(100% + .5rem);
+.callouts button:hover,
+.callouts button.active{
+  filter:brightness(1.22);
+}
+
+/* Right labels share one bullet column. */
+.callouts-right{
+  right:3.3%;
+}
+.callouts-right button{
+  left:0;
+  right:auto;
+}
+.callouts-right button::before{
+  content:"";
+  position:absolute;
+  right:calc(100% + .48rem);
   width:var(--lead);
   height:var(--stem);
-  pointer-events:none;
   border:0;
   border-radius:0;
   background:transparent;
   box-sizing:border-box;
+  pointer-events:none;
 }
-
-.callouts button[data-lead-dir="down"]::before{
+.callouts-right button[data-dir="down"]::before{
   top:50%;
-  bottom:auto;
-  border-top:1px solid rgba(188,193,202,.52);
-  border-left:1px solid rgba(188,193,202,.52);
-  border-radius:1.25cqw 0 0 0;
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+  border-top-left-radius:var(--radius);
 }
-
-.callouts button[data-lead-dir="up"]::before{
-  top:auto;
+.callouts-right button[data-dir="up"]::before{
   bottom:50%;
-  border-bottom:1px solid rgba(188,193,202,.52);
-  border-left:1px solid rgba(188,193,202,.52);
-  border-radius:0 0 0 1.25cqw;
+  border-bottom:1px solid var(--line);
+  border-left:1px solid var(--line);
+  border-bottom-left-radius:var(--radius);
 }
-
-.callouts button[data-lead-dir="flat"]::before{
+.callouts-right button[data-dir="flat"]::before{
   top:50%;
-  bottom:auto;
   height:0;
-  border-top:1px solid rgba(188,193,202,.52);
-  border-radius:0;
+  border-top:1px solid var(--line);
 }
 
-/* Escape Pods intentionally breaks the otherwise rigid label column, as in
-   the reference MSD. */
-.callouts button[data-system="ESCAPE PODS"]{
-  left:48%;
+/* Left labels are a true mirror: text, then a common bullet column. */
+.callouts-left{
+  left:3.3%;
 }
+.callouts-left button{
+  right:0;
+  left:auto;
+  flex-direction:row-reverse;
+}
+.callouts-left button::before{
+  content:"";
+  position:absolute;
+  left:calc(100% + .48rem);
+  width:var(--lead);
+  height:var(--stem);
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-sizing:border-box;
+  pointer-events:none;
+}
+.callouts-left button[data-dir="down"]::before{
+  top:50%;
+  border-top:1px solid var(--line);
+  border-right:1px solid var(--line);
+  border-top-right-radius:var(--radius);
+}
+.callouts-left button[data-dir="up"]::before{
+  bottom:50%;
+  border-bottom:1px solid var(--line);
+  border-right:1px solid var(--line);
+  border-bottom-right-radius:var(--radius);
+}
+.callouts-left button[data-dir="flat"]::before{
+  top:50%;
+  height:0;
+  border-top:1px solid var(--line);
+}
+
+/* Right-side label positions and line geometry. */
+.callouts-right button:nth-child(1){top:0%;--bullet:#c9bdfb;--lead:41cqw;--stem:7.0cqh}
+.callouts-right button:nth-child(2){top:7.5%;--bullet:#9c4f91;--lead:39cqw;--stem:5.4cqh}
+.callouts-right button:nth-child(3){top:12.5%;--bullet:#add0e3;--lead:37cqw;--stem:4.8cqh}
+.callouts-right button:nth-child(4){top:23.5%;--bullet:#add0e3;--lead:29cqw;--stem:4.8cqh}
+.callouts-right button:nth-child(5){top:29.0%;--bullet:#bb83fe;--lead:27cqw;--stem:2.8cqh}
+.callouts-right button:nth-child(6){top:34.0%;--bullet:#f1a66f;--lead:24cqw;--stem:2.2cqh}
+.callouts-right button:nth-child(7){top:47.0%;--bullet:#f1a66f;--lead:18cqw;--stem:0cqh}
+.callouts-right button:nth-child(8){top:58.0%;--bullet:#f1a66f;--lead:21cqw;--stem:0cqh}
+.callouts-right button:nth-child(9){top:69.5%;--bullet:#bb83fe;--lead:17cqw;--stem:0cqh}
+
+/* Left-side label positions and line geometry. */
+.callouts-left button:nth-child(1){top:1.5%;--bullet:#add0e3;--lead:34cqw;--stem:2.0cqh}
+.callouts-left button:nth-child(2){top:10.0%;--bullet:#9c4f91;--lead:28cqw;--stem:3.5cqh}
+.callouts-left button:nth-child(3){top:26.5%;--bullet:#add0e3;--lead:27cqw;--stem:0cqh}
+.callouts-left button:nth-child(4){top:33.5%;--bullet:#bb83fe;--lead:24cqw;--stem:0cqh}
+.callouts-left button:nth-child(5){top:43.5%;--bullet:#add0e3;--lead:24cqw;--stem:0cqh}
+.callouts-left button:nth-child(6){top:56.5%;--bullet:#f1a66f;--lead:31cqw;--stem:0cqh}
+.callouts-left button:nth-child(7){top:76.0%;--bullet:#bb83fe;--lead:29cqw;--stem:5.5cqh}
