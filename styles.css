@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500;600;700&display=swap');
+
 :root{
   --bg:#000;
   --blue:#add0e3;
@@ -18,7 +20,7 @@ body{
   display:grid;
   place-items:center;
   color:var(--text);
-  font-family:"Arial Narrow","Aptos Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif
+  font-family:"Antonio","Arial Narrow","Aptos Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif
 }
 button{font:inherit}
 
@@ -99,27 +101,19 @@ button{font:inherit}
 }
 .plate,.brand{
   position:absolute;
-  top:6.20%;
+  top:6.05%;
   display:inline-block;
   margin:0;
-  font-weight:800;
-  font-stretch:condensed;
-  font-size:clamp(30px,3.25vw,68px);
+  font-family:"Antonio","Arial Narrow",sans-serif;
+  font-weight:500;
+  font-size:clamp(30px,3.05vw,62px);
   line-height:1;
-  letter-spacing:-.025em;
+  letter-spacing:0;
   white-space:nowrap;
   text-transform:uppercase
 }
-.plate{
-  left:6.90%;
-  transform:scaleX(.78);
-  transform-origin:left top
-}
-.brand{
-  right:6.55%;
-  transform:scaleX(.78);
-  transform-origin:right top
-}
+.plate{left:6.90%}
+.brand{right:6.55%}
 
 /* CENTRAL MSD COLUMNS */
 .accent-a,.accent-d{display:none}
@@ -305,7 +299,7 @@ button{font:inherit}
   color:#bfb8cf;
   cursor:pointer;
   text-align:left;
-  font-weight:700;
+  font-weight:500;
   font-size:clamp(8px,.68vw,13px);
   letter-spacing:.02em;
   white-space:nowrap
@@ -358,10 +352,10 @@ button{font:inherit}
 .detail-strip #detail-kicker{
   color:var(--peach);
   font-size:clamp(8px,.56vw,11px);
-  font-weight:800;
+  font-weight:500;
   letter-spacing:.08em
 }
-.detail-strip strong{color:var(--gold);font-size:clamp(11px,.88vw,17px)}
+.detail-strip strong{color:var(--gold);font-size:clamp(11px,.88vw,17px);font-weight:600}
 .detail-strip #detail-copy{
   grid-column:1/-1;
   font-size:clamp(7px,.53vw,10px);
@@ -457,7 +451,7 @@ button{font:inherit}
   gap:2.3vw;
   color:#665d6a;
   font-size:clamp(7px,.52vw,10px);
-  font-weight:800;
+  font-weight:500;
   letter-spacing:.08em
 }
 .footerline span:last-child{margin-left:auto;color:var(--gold)}
