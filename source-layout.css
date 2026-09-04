@@ -30,7 +30,9 @@
   object-fit:fill;
 }
 
-/* Exact live Antonio text placement from Illustrator. */
+/* Exact live Antonio text placement from Illustrator. The black backgrounds
+   recreate the knockout lanes around the live type so the blue header rails
+   cannot show through behind the final characters. */
 .identity{
   position:absolute;
   inset:0;
@@ -41,9 +43,7 @@
   position:absolute;
   right:auto;
   height:auto;
-  padding:0;
   margin:0;
-  background:transparent;
   display:block;
   font-family:"Antonio","Arial Narrow",sans-serif;
   font-weight:400;
@@ -51,16 +51,21 @@
   letter-spacing:0;
   white-space:nowrap;
   color:#f1c219;
+  background:#000;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
 }
 .plate{
   left:11.034447%;
   top:8.045145%;
   font-size:5.425641cqh;
+  padding:0 .72cqw 0 .42cqw;
 }
 .brand{
   left:80.975651%;
   top:8.211360%;
   font-size:5.304395cqh;
+  padding:0 .42cqw 0 .72cqw;
 }
 
 /* Match the Illustrator callout typography while retaining the SVG-derived
