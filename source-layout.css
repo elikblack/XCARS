@@ -33,9 +33,11 @@
 /*
  * HEADER
  *
- * The vector frame now provides real open slots for the labels rather than
- * relying on a black mask. Keep the type centered inside those slots so both
- * sides get deliberate, even breathing room.
+ * The vector frame provides real open slots for the labels. The exported
+ * outlined type shows that the glyphs do not fill those slots edge-to-edge:
+ * they retain deliberate side gutters. Keep the live Antonio type at the
+ * full bar height, then compress only its horizontal axis to reproduce those
+ * gutters without changing its vertical scale.
  */
 .identity{
   position:absolute;
@@ -60,16 +62,19 @@
   white-space:nowrap;
   color:#f1c219;
   background:transparent;
+  transform-origin:center center;
 }
 .plate{
   left:10.460347%;
   width:10.435006%;
   right:auto;
+  transform:scaleX(.87);
 }
 .brand{
   left:78.771387%;
   width:8.305553%;
   right:auto;
+  transform:scaleX(.80);
 }
 
 /* Match the Illustrator callout typography while retaining the SVG-derived
