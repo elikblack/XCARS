@@ -71,7 +71,7 @@
   pointer-events:none;
 }
 
-.callouts button{
+.callout{
   --bullet:#a285bd;
   position:absolute;
   display:flex;
@@ -79,8 +79,6 @@
   width:max-content;
   gap:.18cqw;
   padding:0;
-  border:0;
-  background:transparent;
   color:var(--bullet);
   font-family:"Antonio","Arial Narrow",sans-serif;
   font-size:1.20cqh;
@@ -88,12 +86,9 @@
   line-height:1;
   letter-spacing:0;
   white-space:nowrap;
-  cursor:pointer;
-  pointer-events:auto;
   transform:translateY(-50%);
 }
-.callouts button::before{content:none!important}
-.callouts button span{display:block;line-height:1}
+.callout span{display:block;line-height:1}
 .callouts i{
   width:.318cqw;
   height:.318cqw;
@@ -103,38 +98,37 @@
   background:currentColor;
   box-shadow:0 0 .35cqw color-mix(in srgb,currentColor 55%,transparent);
 }
-.callouts button:hover,.callouts button.active{filter:brightness(1.22)}
 
 /* Exact bullet columns from the SVG. Left labels terminate at the bullet;
    right labels begin at the bullet. */
-.callouts-left button{
+.callouts-left .callout{
   right:85.0623%;
   left:auto;
   justify-content:flex-end;
   text-align:right;
 }
-.callouts-right button{
+.callouts-right .callout{
   left:83.2047%;
   right:auto;
   text-align:left;
 }
 
 /* Left callouts: exact bullet-center Y positions and source colors. */
-.callouts-left button:nth-child(1){top:28.7066%;--bullet:#aed0e2}
-.callouts-left button:nth-child(2){top:32.6364%;--bullet:#916399}
-.callouts-left button:nth-child(3){top:40.4194%;--bullet:#aed0e2}
-.callouts-left button:nth-child(4){top:43.8161%;--bullet:#a285bd}
-.callouts-left button:nth-child(5){top:48.7169%;--bullet:#aed0e2}
-.callouts-left button:nth-child(6){top:56.7583%;--bullet:#efa672}
-.callouts-left button:nth-child(7){top:66.4298%;--bullet:#a285bd}
+.callouts-left .callout:nth-child(1){top:28.7066%;--bullet:#aed0e2}
+.callouts-left .callout:nth-child(2){top:32.6364%;--bullet:#916399}
+.callouts-left .callout:nth-child(3){top:40.4194%;--bullet:#aed0e2}
+.callouts-left .callout:nth-child(4){top:43.8161%;--bullet:#a285bd}
+.callouts-left .callout:nth-child(5){top:48.7169%;--bullet:#aed0e2}
+.callouts-left .callout:nth-child(6){top:56.7583%;--bullet:#efa672}
+.callouts-left .callout:nth-child(7){top:66.4298%;--bullet:#a285bd}
 
 /* Right callouts: exact bullet-center Y positions and source colors. */
-.callouts-right button:nth-child(1){top:27.9483%;--bullet:#aed0e2}
-.callouts-right button:nth-child(2){top:31.2624%;--bullet:#916399}
-.callouts-right button:nth-child(3){top:33.3017%;--bullet:#aed0e2}
-.callouts-right button:nth-child(4){top:38.2541%;--bullet:#aed0e2}
-.callouts-right button:nth-child(5){top:40.8926%;--bullet:#a285bd}
-.callouts-right button:nth-child(6){top:43.1033%;--bullet:#efa672}
-.callouts-right button:nth-child(7){top:49.4690%;--bullet:#efa672}
-.callouts-right button:nth-child(8){top:54.8864%;--bullet:#efa672}
-.callouts-right button:nth-child(9){top:61.3781%;--bullet:#a285bd}
+.callouts-right .callout:nth-child(1){top:27.9483%;--bullet:#aed0e2}
+.callouts-right .callout:nth-child(2){top:31.2624%;--bullet:#916399}
+.callouts-right .callout:nth-child(3){top:33.3017%;--bullet:#aed0e2}
+.callouts-right .callout:nth-child(4){top:38.2541%;--bullet:#aed0e2}
+.callouts-right .callout:nth-child(5){top:40.8926%;--bullet:#a285bd}
+.callouts-right .callout:nth-child(6){top:43.1033%;--bullet:#efa672}
+.callouts-right .callout:nth-child(7){top:49.4690%;--bullet:#efa672}
+.callouts-right .callout:nth-child(8){top:54.8864%;--bullet:#efa672}
+.callouts-right .callout:nth-child(9){top:61.3781%;--bullet:#a285bd}
