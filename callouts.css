@@ -9,9 +9,17 @@
 }
 
 /* Use the exported vector structure directly rather than approximating the
-   large LCARS shapes with independent CSS rectangles. */
+   large LCARS shapes with independent CSS rectangles.
+
+   The frame must sit ABOVE the vehicle artwork. Several of the visible
+   Illustrator bars/sweeps cross the vehicle's image rectangle; when the shell
+   lived at the old z-index:0 they were present but completely hidden beneath
+   the opaque hero image. Callout leaders come later in the DOM at the same
+   z-index, so they still paint over the frame, followed by callout labels and
+   the header identity layer. */
 .lcars-shell{
   inset:0;
+  z-index:4;
   background:url('assets/reference-frame.svg') center / 100% 100% no-repeat;
 }
 .lcars-shell > *{display:none}
