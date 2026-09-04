@@ -7,10 +7,10 @@
       .st2 { fill: #8a4b9c; }
       .st4 { fill: #c6bbdc; }
       .st6, .st7 { fill: #eea572; }
-      /* These were hidden construction-layer accents in the Illustrator
-         export. Keep their original 25% opacity, but render them as part of
-         the live framing so the full rail/sweep vocabulary is visible. */
-      .st7 { opacity: .25; }
+      /* These are hidden construction-layer bands in the Illustrator source,
+         not part of the visible framing. Leave them hidden and expose the real
+         bars/sweeps by layering the frame above the vehicle instead. */
+      .st7 { display:none; opacity:.25; }
       .st8 { fill: #accfe1; }
     </style>
   </defs>
