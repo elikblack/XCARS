@@ -29,45 +29,6 @@ document.querySelectorAll('.callouts-right button').forEach((button, i) => {
   button.dataset.dir = dirs[i];
 });
 
-/*
- * HEADER TYPE FIT
- *
- * The Illustrator source gives us the physical rail height, while the browser
- * supplies the actual rendered Antonio metrics. Measure the live text after
- * the webfont loads and choose a font size whose visible glyph height matches
- * the 27.27-unit source rail exactly. The black slot itself remains content-
- * sized with equal side padding, so changing either label stays painless.
- */
-async function fitHeaderLabels() {
-  if (document.fonts?.ready) await document.fonts.ready;
-
-  const msd = document.querySelector('.msd');
-  const labels = document.querySelectorAll('.identity .plate, .identity .brand');
-  if (!msd || !labels.length) return;
-
-  const targetHeight = msd.clientHeight * (27.27 / 484);
-  const canvas = fitHeaderLabels.canvas || (fitHeaderLabels.canvas = document.createElement('canvas'));
-  const ctx = canvas.getContext('2d');
-  const sampleSize = 100;
-
-  ctx.font = `400 ${sampleSize}px Antonio`;
-
-  labels.forEach(label => {
-    const metrics = ctx.measureText(label.textContent.trim());
-    const glyphHeight = (metrics.actualBoundingBoxAscent || 0) + (metrics.actualBoundingBoxDescent || 0);
-    if (!glyphHeight) return;
-
-    label.style.fontSize = `${targetHeight * (sampleSize / glyphHeight)}px`;
-  });
-}
-
-fitHeaderLabels();
-let headerResizeFrame = 0;
-window.addEventListener('resize', () => {
-  cancelAnimationFrame(headerResizeFrame);
-  headerResizeFrame = requestAnimationFrame(fitHeaderLabels);
-});
-
 const title = document.querySelector('#detail-title');
 const copy = document.querySelector('#detail-copy');
 const kicker = document.querySelector('#detail-kicker');
