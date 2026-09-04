@@ -32,7 +32,11 @@
 
 /* Exact live Antonio text placement from Illustrator. The black backgrounds
    recreate the knockout lanes around the live type so the blue header rails
-   cannot show through behind the final characters. */
+   cannot show through behind the final characters.
+
+   Inspector pass: the knockout itself needs to match the header rail, not
+   the glyph box. The rail is 26.97 units tall on the 484-unit artboard
+   (5.5723%), and centering visually lands the lane at roughly top:9.7%. */
 .identity{
   position:absolute;
   inset:0;
@@ -42,9 +46,11 @@
 .plate,.brand{
   position:absolute;
   right:auto;
-  height:auto;
+  top:9.7%;
+  height:5.5723%;
   margin:0;
-  display:block;
+  display:flex;
+  align-items:center;
   font-family:"Antonio","Arial Narrow",sans-serif;
   font-weight:400;
   line-height:1;
@@ -57,13 +63,11 @@
 }
 .plate{
   left:11.034447%;
-  top:8.045145%;
   font-size:5.425641cqh;
   padding:0 .72cqw 0 .42cqw;
 }
 .brand{
   left:80.975651%;
-  top:8.211360%;
   font-size:5.304395cqh;
   padding:0 .42cqw 0 .72cqw;
 }
