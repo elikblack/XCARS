@@ -33,14 +33,9 @@
 /*
  * HEADER
  *
- * The vector reference already builds each header as two blue pieces with a
- * real black gap between them. Do not mask the rail with a black text box.
- * Put the live type inside that gap and center it there.
- *
- * Source geometry from reference-frame.svg:
- * left gap  x 95.39 -> 176.56
- * right gap x 730.33 -> 794.07
- * bar y 46.58, height 27.27
+ * The vector frame now provides real open slots for the labels rather than
+ * relying on a black mask. Keep the type centered inside those slots so both
+ * sides get deliberate, even breathing room.
  */
 .identity{
   position:absolute;
@@ -68,12 +63,12 @@
 }
 .plate{
   left:10.460347%;
-  width:8.901000%;
+  width:10.435006%;
   right:auto;
 }
 .brand{
-  left:80.087069%;
-  width:6.989648%;
+  left:78.771387%;
+  width:8.305553%;
   right:auto;
 }
 
