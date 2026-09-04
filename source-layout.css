@@ -32,28 +32,30 @@
 /*
  * HEADER
  *
- * IMPORTANT: the rail artwork already contains the two real black openings.
- * These outer elements are therefore geometry-only slots. They have no black
- * background and never move with the lettering.
+ * The rail artwork already contains the two real black openings. These outer
+ * elements are geometry-only slots. They have no knockout background and do
+ * not move with the lettering.
  *
- * Latest corrected source, transformed into the 911.92 x 484 XCARS canvas:
+ * Corrected source geometry, transformed into the 911.92 x 484 XCARS canvas:
  *   header band: y 46.58 -> 73.85   (27.27 high)
  *   left opening:  x 95.09 -> 182.85 (87.76 wide)
  *   right opening: x 730.33 -> 797.94 (67.61 wide)
  *
- * The original Illustrator type was 36 source units high as a font size.
- * 36 / 484 = 7.438017cqh. Modern text-box trimming lets flexbox center the
- * cap-height/baseline box instead of Antonio's larger invisible line box.
+ * The latest browser screenshot confirmed that the slots themselves are in
+ * the right places. The remaining discrepancy is font rendering: live Antonio
+ * is visibly wider and slightly taller than the outlined Illustrator type.
+ * We therefore transform ONLY the inner text to match the source lettering.
+ * The rail geometry stays untouched.
  *
  * MANUAL TUNING
  * ----------------
- * If browser font rendering still differs from Illustrator, adjust ONLY the
- * variables on .plate and .brand below. The rail geometry will stay put.
+ * These are the only values that should ever need hand adjustment:
  *
- *   --text-x       horizontal nudge (try .02cqw increments)
- *   --text-y       vertical nudge   (try .02cqh increments)
- *   --text-scale-x horizontal width correction (e.g. .99, 1.01)
- *   --text-size    per-label font-size override if ever needed
+ *   --text-x       horizontal nudge
+ *   --text-y       vertical nudge
+ *   --text-scale-x horizontal width correction
+ *   --text-scale-y vertical height correction
+ *   --text-size    font-size before transform
  *
  * Set --header-debug-outline to a visible color to see the fixed source slots.
  */
@@ -85,10 +87,10 @@
   outline:1px solid var(--header-debug-outline);
   outline-offset:-1px;
 
-  /* Defaults; override per label below. */
   --text-x:0cqw;
-  --text-y:0cqh;
+  --text-y:-.55cqh;
   --text-scale-x:1;
+  --text-scale-y:.85;
   --text-size:var(--header-font-size);
 }
 
@@ -97,10 +99,9 @@
   width:9.623651%;
   right:auto;
 
-  /* ALF-1129 tuning knobs */
+  /* ALF-1129: source outline is ~82.6% of the opening width. */
   --text-x:0cqw;
-  --text-y:0cqh;
-  --text-scale-x:1;
+  --text-scale-x:.66;
 }
 
 .brand{
@@ -108,10 +109,9 @@
   width:7.414028%;
   right:auto;
 
-  /* XCARS tuning knobs */
+  /* XCARS: source outline is ~78.7% of the opening width. */
   --text-x:0cqw;
-  --text-y:0cqh;
-  --text-scale-x:1;
+  --text-scale-x:.72;
 }
 
 .identity-text{
@@ -128,13 +128,13 @@
   color:var(--header-color);
   background:transparent;
   font-synthesis:none;
-  transform:translate(var(--text-x),var(--text-y)) scaleX(var(--text-scale-x));
+  transform:translate(var(--text-x),var(--text-y)) scale(var(--text-scale-x),var(--text-scale-y));
   transform-origin:center center;
 }
 
 /* Trim Antonio's invisible font box to the cap-height/baseline box before
    centering. Older browsers simply fall back to line-height:1 plus the manual
-   --text-y knob above. */
+   tuning variables above. */
 @supports (text-box:trim-both cap alphabetic){
   .identity-text{
     text-box:trim-both cap alphabetic;
