@@ -1,10 +1,9 @@
 /*
  * Final source-layout override.
  *
- * callouts.css already renders the exact SVG frame, leader artwork, bullet
- * columns, label Y positions, and colors. This layer supplies the geometry
- * that the SVG export could not: the exact Illustrator artboard, placed
- * Xterra bitmap transform, and live header text placement.
+ * callouts.css renders the exact SVG frame, leader artwork, bullet columns,
+ * label Y positions, and colors. This layer supplies the Illustrator-derived
+ * vehicle placement and live, editable header typography.
  */
 
 .msd{
@@ -33,11 +32,16 @@
 /*
  * HEADER
  *
- * The vector frame provides real open slots for the labels. The exported
- * outlined type shows that the glyphs do not fill those slots edge-to-edge:
- * they retain deliberate side gutters. Keep the live Antonio type at the
- * full bar height, then compress only its horizontal axis to reproduce those
- * gutters without changing its vertical scale.
+ * The corrected export gives us a clean 27.27-unit header band. Keep the
+ * labels live as Antonio, but treat each one as a content-sized black slot
+ * centered on the outlined source text. Equal inline padding reproduces the
+ * source gutters and also lets either label change without rebuilding rails.
+ *
+ * Source, transformed into the 911.92 x 484 XCARS canvas:
+ * band y: 46.58 -> 73.85
+ * left text center x: 139.37
+ * right text center x: 764.105
+ * source side gutter: about 7.4 units
  */
 .identity{
   position:absolute;
@@ -47,34 +51,33 @@
 }
 .plate,.brand{
   position:absolute;
-  top:9.623967%;
+  top:12.441116%;
   height:5.634298%;
+  width:max-content;
   margin:0;
-  padding:0;
+  padding:0 .81cqw;
+  box-sizing:border-box;
   display:flex;
   align-items:center;
   justify-content:center;
   font-family:"Antonio","Arial Narrow",sans-serif;
   font-weight:400;
-  font-size:5.634298cqh;
+  font-size:7.5cqh; /* JS refines this to exact rendered glyph height. */
   line-height:1;
   letter-spacing:0;
   white-space:nowrap;
-  color:#f1c219;
-  background:transparent;
+  color:#f0c119;
+  background:#000;
+  transform:translate(-50%,-50%);
   transform-origin:center center;
 }
 .plate{
-  left:10.460347%;
-  width:10.435006%;
+  left:15.283139%;
   right:auto;
-  transform:scaleX(.87);
 }
 .brand{
-  left:78.771387%;
-  width:8.305553%;
+  left:83.790793%;
   right:auto;
-  transform:scaleX(.80);
 }
 
 /* Match the Illustrator callout typography while retaining the SVG-derived
